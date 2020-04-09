@@ -1,4 +1,5 @@
 library dart_mc_ping;
+import 'dart:io';
 
 /// A Calculator.
 class Calculator {
