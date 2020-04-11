@@ -78,6 +78,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.16.1"
+  fixnum:
+    dependency: transitive
+    description:
+      name: fixnum
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.10.11"
   glob:
     dependency: transitive
     description:
@@ -218,6 +225,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.4"
+  raw:
+    dependency: "direct main"
+    description:
+      name: raw
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   shelf:
     dependency: transitive
     description:

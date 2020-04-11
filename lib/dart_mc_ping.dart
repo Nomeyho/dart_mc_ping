@@ -1,14 +1,18 @@
 library dart_mc_ping;
 
+import 'package:dart_mc_ping/model/status_response.dart';
 import 'package:dart_mc_ping/protocol/mc_client.dart';
 
-import 'models/Player.dart';
+void main() async {
+  await ping("mc.hypixel.net");
+}
 
-Future<StatusResponse> ping(final Uri uri, { debug = false }) async {
-  final client = McClient(uri);
+Future<StatusResponse> ping(String host, { int port = 25565, debug = true }) async {
+
+  final client = McClient(host, port);
 
   await client.connect();
-  _debug('Connected to $uri', debug);
+  _debug('Connected to $host:$port', debug);
 
   await client.handshake();
   _debug('Handshake performed', debug);

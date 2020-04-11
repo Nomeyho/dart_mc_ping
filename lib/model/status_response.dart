@@ -1,4 +1,5 @@
-import 'package:dart_mc_ping/models/Player.dart';
+import 'package:dart_mc_ping/model/version.dart';
+import 'package:dart_mc_ping/model/Players.dart';
 
 class StatusResponse {
   final String description;
