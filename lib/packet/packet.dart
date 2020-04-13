@@ -26,9 +26,9 @@ abstract class Packet {
 
   decode(Uint8List data) {
     RawReader reader = RawReader.withBytes(data);
-    print(data);
+    // print(data);
     int len = reader.readVarUint();
-    print('len $len');
+    // print('len $len');
     decodeData(reader);
   }
 }
