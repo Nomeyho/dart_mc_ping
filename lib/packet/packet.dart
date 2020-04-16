@@ -1,18 +1,15 @@
-
 import 'dart:typed_data';
 
-import 'package:raw/raw.dart';
-
 abstract class Packet {
-
   int id;
 
   Packet(this.id);
 
-  void encodeData(RawWriter writer);
+  Uint8List encode();
 
-  void decodeData(RawReader reader);
+  void decode(Uint8List data);
 
+/*
   Uint8List encode() {
     RawWriter dataWriter = RawWriter.withCapacity(1024);
     encodeData(dataWriter);
@@ -26,9 +23,7 @@ abstract class Packet {
 
   decode(Uint8List data) {
     RawReader reader = RawReader.withBytes(data);
-    // print(data);
-    int len = reader.readVarUint();
-    // print('len $len');
     decodeData(reader);
   }
+  */
 }

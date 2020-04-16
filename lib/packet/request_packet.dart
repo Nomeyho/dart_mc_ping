@@ -1,20 +1,18 @@
-
 import 'dart:typed_data';
 
 import 'package:dart_mc_ping/packet/packet.dart';
-import 'package:raw/raw.dart';
 
 class RequestPacket extends Packet {
-
   RequestPacket() : super(0);
 
   @override
-  void encodeData(RawWriter writer) {
-    writer.writeVarUint(id);
+  Uint8List encode() {
+    return Uint8List(0);
+    // TODO writer.writeVarUint(id);
   }
 
   @override
-  void decodeData(RawReader reader) {
+  void decode(Uint8List data) {
     throw Exception('Not implemented');
   }
 }

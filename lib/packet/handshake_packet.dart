@@ -17,17 +17,21 @@ class HandshakePacket extends Packet {
   ) : super(0);
 
   @override
-  void encodeData(RawWriter writer) {
-    writer.writeVarUint(id);
+  Uint8List encode() {
+    RawWriter writer = RawWriter.withCapacity(1024);
+
+// TODO    writer.writeVarUint(id);
     writer.writeVarUint(protocolVersion);
     writer.writeVarUint(hostname.length);
     writer.writeUtf8(hostname);
     writer.writeUint16(port);
     writer.writeVarUint(state);
+
+    return writer.toUint8ListView().sublist(0, writer.length);
   }
 
   @override
-  void decodeData(RawReader reader) {
+  void decode(Uint8List data) {
     throw Exception('Not implemented');
   }
 }
