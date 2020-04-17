@@ -1,11 +1,10 @@
 class Version {
   final String name;
-  final String protocol;
+  final int protocol;
 
-  Version(
-    this.name,
-    this.protocol,
-  );
+  Version.fromJson(Map<String, dynamic> json)
+      : this.name = json['name'],
+        this.protocol = json['protocol'];
 
   @override
   String toString() {

@@ -30,6 +30,10 @@ class McClient {
     await for (List<int> data in _socket.asBroadcastStream()) {
       buffer.addAll(data);
 
+      if(data.length < 2) {
+        continue;
+      }
+
       final RawReader reader = RawReader.withBytes(buffer);
       final int size = reader.readVarUint();
       final int id = reader.readVarUint();

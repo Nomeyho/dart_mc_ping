@@ -11,13 +11,14 @@ void main() async {
     print('[$level] ${record.time} | ${record.message}');
   });
 
-  await ping("hub.mcs.gg");
+  await ping("play.becto.net");
 }
 
 Future<StatusResponse> ping(String host, {int port = 25565}) async {
   final client = McClient(host, port);
   await client.connect();
   final statusResponse = await client.ping();
+  print('ici: $statusResponse');
   await client.close();
   return statusResponse;
 }
