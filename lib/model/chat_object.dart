@@ -1,7 +1,6 @@
 import 'package:dart_mc_ping/model/chat_color.dart';
 
-/// Minecraft ChatObject
-/// The server MOTD is returned in this format.
+/// Minecraft ChatObject. The server MOTD is returned in this format.
 class ChatObject {
   final bool bold;
   final bool italic;

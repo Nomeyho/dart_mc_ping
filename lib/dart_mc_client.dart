@@ -12,6 +12,7 @@ import 'package:fixnum/fixnum.dart';
 import 'package:logging/logging.dart';
 import 'package:raw/raw.dart';
 
+/// Minecraft socket client.
 class McClient {
   static final log = Logger('McClient');
   static final timeout = Duration(seconds: 10);

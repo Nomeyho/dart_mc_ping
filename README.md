@@ -1,6 +1,5 @@
 # dart_mc_ping
-
-> A Dart implementation of the Minecraft ping protocol
+A Dart implementation of the [Minecraft ping protocol(https://wiki.vg/Server_List_Ping)
 
 ## Usage
 ```
@@ -11,7 +10,7 @@ print('${statusResponse.ms} ms'); // 28ms
 ```
 
 ## Note
-The text formatters (color, bold, italic etc.) of the server's MOTD
+The text formatters of the server's MOTD
 are sometimes returned inside the text instead of using the dedicated fields of the `ChatObject`.
 
 Example:
