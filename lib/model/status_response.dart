@@ -6,12 +6,16 @@ import 'package:dart_mc_ping/model/version.dart';
 class StatusResponse {
   /// Server MOTD
   final ChatObject description;
+
   /// Player related information (online, max etc.)
   final Players players;
+
   /// Server version
   final Version version;
+
   /// Server icon, base64 encoded
   final String favicon;
+
   /// Server latency in milliseconds
   int ms; // added afterwards
 

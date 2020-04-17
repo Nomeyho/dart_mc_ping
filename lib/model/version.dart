@@ -2,6 +2,7 @@
 class Version {
   /// Version name
   final String name;
+
   /// Protocol version
   final int protocol;
 

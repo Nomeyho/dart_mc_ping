@@ -30,6 +30,4 @@ class ResponsePacket extends Packet {
   String toString() {
     return 'ResponsePacket{response: ...}';
   }
-
-
 }

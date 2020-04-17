@@ -37,7 +37,7 @@ class McClient {
     await for (List<int> data in _socketStream) {
       buffer.addAll(data);
 
-      if(data.length < 2) {
+      if (data.length < 2) {
         continue;
       }
 
