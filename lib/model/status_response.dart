@@ -1,4 +1,4 @@
-import 'package:dart_mc_ping/model/Players.dart';
+import 'package:dart_mc_ping/model/players.dart';
 import 'package:dart_mc_ping/model/chat_object.dart';
 import 'package:dart_mc_ping/model/version.dart';
 
