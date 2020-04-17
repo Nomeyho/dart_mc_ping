@@ -1,5 +1,5 @@
 # dart_mc_ping
-A Dart implementation of the [Minecraft ping protocol(https://wiki.vg/Server_List_Ping)
+A Dart implementation of the [Minecraft ping protocol](https://wiki.vg/Server_List_Ping)
 
 ## Usage
 ```

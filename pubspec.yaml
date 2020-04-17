@@ -1,7 +1,6 @@
 name: dart_mc_ping
 description: A Dart implementation of the Minecraft ping protocol
 version: 1.0.0
-author: nomeyho.dev@gmail.com
 homepage: https://github.com/Nomeyho/dart_mc_ping
 
 environment:
