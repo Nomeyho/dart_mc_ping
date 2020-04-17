@@ -3,7 +3,7 @@
 > A Dart implementation of the Minecraft ping protocol
 
 ## Usage
-``
+```
 import 'package:dart_mc_ping/dart_mc_ping.dart';
 
 final statusResponse = await ping('play.hivemc.com');
