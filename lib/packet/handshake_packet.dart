@@ -33,4 +33,9 @@ class HandshakePacket extends Packet {
   void decode(Uint8List data) {
     throw Exception('Not implemented');
   }
+
+  @override
+  String toString() {
+    return 'HandshakePacket{protocolVersion: $protocolVersion, hostname: $hostname, port: $port, state: $state}';
+  }
 }

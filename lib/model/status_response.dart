@@ -7,15 +7,18 @@ class StatusResponse {
   final Players players;
   final Version version;
   final String favicon;
+  int ms; // added afterwards
 
   StatusResponse.fromJson(Map<String, dynamic> json)
-      : description = ChatObject.fromJson(json['description']),
+      : description = json['description'] is String
+            ? ChatObject.fromString(json['description'])
+            : ChatObject.fromJson(json['description']),
         players = Players.fromJson(json['players']),
         version = Version.fromJson(json['version']),
         favicon = json['favicon'];
 
   @override
   String toString() {
-    return 'StatusResponse{description: $description, players: $players, version: $version, favicon: $favicon}';
+    return 'StatusResponse{description: $description, players: $players, version: $version, favicon: $favicon, ms: $ms}';
   }
 }

@@ -14,4 +14,9 @@ class RequestPacket extends Packet {
   void decode(Uint8List data) {
     throw Exception('Not implemented');
   }
+
+  @override
+  String toString() {
+    return 'RequestPacket{}';
+  }
 }

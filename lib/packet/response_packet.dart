@@ -19,12 +19,18 @@ class ResponsePacket extends Packet {
   void decode(Uint8List data) {
     RawReader reader = RawReader.withBytes(data);
 
-    int len = reader.readVarUint();
-    print('[ResponsePacket] JSON length $len');
-
+    final int len = reader.readVarUint();
     final chars = reader.readUtf8(len);
     final json = jsonDecode(chars);
+    print(json['description']); // TODO
 
     this.response = StatusResponse.fromJson(json);
   }
+
+  @override
+  String toString() {
+    return 'ResponsePacket{response: ...}';
+  }
+
+
 }

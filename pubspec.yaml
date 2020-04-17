@@ -10,6 +10,7 @@ environment:
 dependencies:
   raw: ^0.2.0
   logging: ^0.11.4
+  fixnum: ^0.10.11
 
 dev_dependencies:
   test: ^1.9.4

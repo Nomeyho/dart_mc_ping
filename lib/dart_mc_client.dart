@@ -4,30 +4,36 @@ import 'dart:typed_data';
 import 'package:dart_mc_ping/model/status_response.dart';
 import 'package:dart_mc_ping/packet/handshake_packet.dart';
 import 'package:dart_mc_ping/packet/packet.dart';
+import 'package:dart_mc_ping/packet/ping_packet.dart';
+import 'package:dart_mc_ping/packet/pong_packet.dart';
 import 'package:dart_mc_ping/packet/request_packet.dart';
 import 'package:dart_mc_ping/packet/response_packet.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:logging/logging.dart';
 import 'package:raw/raw.dart';
 
 class McClient {
   static final log = Logger('McClient');
+  static final timeout = Duration(seconds: 10);
 
   final String _host;
   final int _port;
   Socket _socket;
+  Stream<Uint8List> _socketStream;
 
   McClient(this._host, this._port);
 
   connect() async {
-    _socket = await Socket.connect(_host, _port);
-    log.info("Connected to $_host:$_port");
+    _socket = await Socket.connect(_host, _port, timeout: timeout);
+    _socketStream = _socket.asBroadcastStream();
+    log.fine("Connected to $_host:$_port");
   }
 
   Future<Packet> _readPacket() async {
     final List<int> buffer = List();
 
     /// Wait that all data are received
-    await for (List<int> data in _socket.asBroadcastStream()) {
+    await for (List<int> data in _socketStream) {
       buffer.addAll(data);
 
       if(data.length < 2) {
@@ -37,7 +43,7 @@ class McClient {
       final RawReader reader = RawReader.withBytes(buffer);
       final int size = reader.readVarUint();
       final int id = reader.readVarUint();
-      log.fine('Received packet $id (${buffer.length} / $size bytes)');
+      log.finer('Received packet $id (${buffer.length} / $size bytes)');
 
       if (buffer.length >= size) {
         break;
@@ -53,20 +59,28 @@ class McClient {
     for (int i = 0; i < size - 1; ++i) {
       payload[i] = reader.readUint8();
     }
-    log.finer('Read payload of packet id=$id (size=$size): $payload');
+    log.finest('Read payload of packet id=$id (size=$size): $payload');
 
     /// Decode packet
+    Packet packet;
     switch (id) {
       case 0:
-        final response = ResponsePacket();
-        response.decode(payload);
-        return response;
+        packet = ResponsePacket();
+        break;
+      case 1:
+        packet = PongPacket();
+        break;
       default:
         throw Exception('Unexpected packet with ID ${id}');
     }
+
+    packet.decode(payload);
+    log.fine('Received $packet');
+    return packet;
   }
 
-  _writePacket(Packet packet) {
+  void _writePacket(Packet packet) {
+    log.fine('Sending $packet');
     final Uint8List data = packet.encode();
     final int dataLen = data.length;
 
@@ -78,29 +92,31 @@ class McClient {
     final int bytesLen = packetWriter.length;
     final Uint8List bytes = packetWriter.toUint8ListView().sublist(0, bytesLen);
 
-    log.finer('Writing packet id=${packet.id}: $bytes');
+    log.finest('Sending bytes: $bytes');
     _socket.add(bytes);
   }
 
   Future<StatusResponse> ping() async {
+    /// status
     final handshake = HandshakePacket(4, _host, _port, 1);
     _writePacket(handshake);
-    log.info('Handshake performed');
-
     final request = RequestPacket();
     _writePacket(request);
-    log.info('Request packet sent');
+    final response = await _readPacket() as ResponsePacket;
 
-    final response = await _readPacket();
-    if (response is ResponsePacket) {
-      log.info('Received response packet');
-      return response.response;
-    }
-    throw Exception('Unexpected packet: $response');
+    /// ping
+    final ping = PingPacket(_now);
+    _writePacket(ping);
+    final pong = await _readPacket() as PongPacket;
+
+    response.response.ms = (_now - pong.now).toInt();
+    return response.response;
   }
+
+  get _now => Int64(DateTime.now().millisecondsSinceEpoch);
 
   close() async {
     await _socket.close();
-    log.info("Connection closed");
+    log.fine("Connection closed");
   }
 }

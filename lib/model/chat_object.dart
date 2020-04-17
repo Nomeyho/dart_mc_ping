@@ -10,6 +10,16 @@ class ChatObject {
   final String text;
   final List<ChatObject> extra;
 
+  ChatObject.fromString(String text)
+      : this.bold = false,
+        this.italic = false,
+        this.underlined = false,
+        this.strikethrough = false,
+        this.obfuscated = false,
+        this.color = ChatColor.white,
+        this.text = text,
+        this.extra = [];
+
   ChatObject.fromJson(Map<String, dynamic> json)
       : this.bold = json['bold'] ?? false,
         this.italic = json['italic'] ?? false,
