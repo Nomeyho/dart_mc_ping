@@ -1,33 +1,23 @@
 library dart_mc_ping;
 
+import 'package:dart_mc_ping/dart_mc_client.dart';
 import 'package:dart_mc_ping/model/status_response.dart';
-import 'package:dart_mc_ping/protocol/mc_client.dart';
+import 'package:logging/logging.dart';
 
 void main() async {
-  await ping("mc.hypixel.net");
+  Logger.root.level = Level.ALL;
+  Logger.root.onRecord.listen((record) {
+    final level = '${record.level.name.padRight(5)}';
+    print('[$level] ${record.time} | ${record.message}');
+  });
+
+  await ping("hub.mcs.gg");
 }
 
-Future<StatusResponse> ping(String host, { int port = 25565, debug = true }) async {
-
+Future<StatusResponse> ping(String host, {int port = 25565}) async {
   final client = McClient(host, port);
-
   await client.connect();
-  _debug('Connected to $host:$port', debug);
-
-  await client.handshake();
-  _debug('Handshake performed', debug);
-
-  final statusResponse = await client.request();
-  _debug('Received response $statusResponse', debug);
-
+  final statusResponse = await client.ping();
   await client.close();
-  _debug('Closed socket', debug);
-
   return statusResponse;
-}
-
-_debug(message, debug) {
-  if(debug) {
-    print(message);
-  }
 }

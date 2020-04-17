@@ -20,7 +20,6 @@ class HandshakePacket extends Packet {
   Uint8List encode() {
     RawWriter writer = RawWriter.withCapacity(1024);
 
-// TODO    writer.writeVarUint(id);
     writer.writeVarUint(protocolVersion);
     writer.writeVarUint(hostname.length);
     writer.writeUtf8(hostname);

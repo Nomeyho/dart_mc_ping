@@ -1,10 +1,11 @@
 import 'dart:typed_data';
 
+import 'package:dart_mc_ping/model/status_response.dart';
 import 'package:dart_mc_ping/packet/packet.dart';
 import 'package:raw/raw.dart';
 
 class ResponsePacket extends Packet {
-  String json;
+  StatusResponse response;
 
   ResponsePacket() : super(0);
 
@@ -17,21 +18,13 @@ class ResponsePacket extends Packet {
   void decode(Uint8List data) {
     RawReader reader = RawReader.withBytes(data);
 
-    /*
-    int size = reader.readVarUint();
-    print('size $size');
-    int id = reader.readVarUint();
-    print('id $id');
-    */
     int len = reader.readVarUint();
-    print('json length $len');
+    print('[ResponsePacket] JSON length $len');
 
-    final chars =
-        reader.readUtf8(reader.availableLengthInBytes - reader.index - 1);
+    final chars = reader.readUtf8(len);
     print(chars);
 
-    //json = reader.readUtf8(1452);
-    // print(json);
-    //String.fromCharCodes(charCodes)
+
+
   }
 }

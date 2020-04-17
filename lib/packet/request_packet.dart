@@ -8,7 +8,6 @@ class RequestPacket extends Packet {
   @override
   Uint8List encode() {
     return Uint8List(0);
-    // TODO writer.writeVarUint(id);
   }
 
   @override
