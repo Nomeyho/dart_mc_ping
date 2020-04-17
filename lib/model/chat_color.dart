@@ -1,3 +1,5 @@
+/// Minecraft chat colors
+/// see https://wiki.vg/Chat#Colors
 enum ChatColor {
   black,
   dark_blue,
@@ -17,18 +19,12 @@ enum ChatColor {
   white,
 }
 
-extension _ChatColorExtension on ChatColor {
-  String get name {
-    return this.toString().split('.').last;
-  }
-}
-
-Map<String, ChatColor> colorMap = Map.fromIterable(
+Map<String, ChatColor> _colorMap = Map.fromIterable(
   ChatColor.values,
-  key: (c) => (c as ChatColor).name,
+  key: (c) => c.toString().split('.').last,
   value: (c) => c,
 );
 
 ChatColor parseColor(String string) {
-  return colorMap[string];
+  return _colorMap[string];
 }

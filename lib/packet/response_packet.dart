@@ -22,7 +22,6 @@ class ResponsePacket extends Packet {
     final int len = reader.readVarUint();
     final chars = reader.readUtf8(len);
     final json = jsonDecode(chars);
-    print(json['description']); // TODO
 
     this.response = StatusResponse.fromJson(json);
   }
