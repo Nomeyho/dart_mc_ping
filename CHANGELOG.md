@@ -1,3 +1,6 @@
+## [1.0.5] - 26/04/2020
+* Minor fix
+
 ## [1.0.4] - 26/04/2020
 * Standardize color and text formatter
 * Support printing the server MOTD in the console with colors

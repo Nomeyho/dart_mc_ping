@@ -10,7 +10,6 @@ import 'package:dart_mc_ping/packet/pong_packet.dart';
 import 'package:dart_mc_ping/packet/request_packet.dart';
 import 'package:dart_mc_ping/packet/response_packet.dart';
 import 'package:fixnum/fixnum.dart';
-import 'package:logging/logging.dart';
 import 'package:raw/raw.dart';
 
 /// Minecraft socket client.

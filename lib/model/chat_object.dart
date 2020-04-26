@@ -117,7 +117,7 @@ class ChatObject {
     ChatObject normalizedMessage = rootMessage;
     int i = 0;
 
-    // bottom-up
+    /// bottom-up
     this
         .extra
         .map((extra) => extra.normalize())
@@ -141,27 +141,32 @@ class ChatObject {
         final ChatFormatter formatter = ChatFormatter.getFormatByCode(code);
 
         if (formatter == ChatFormatter.italic) {
-          if (normalizedMessage.italic != null)
+          if (normalizedMessage.italic != null) {
             normalizedMessage = _wrapMessage(normalizedMessage);
+          }
           normalizedMessage.setItalic();
         } else if (formatter == ChatFormatter.bold) {
-          if (normalizedMessage.bold != null)
+          if (normalizedMessage.bold != null) {
             normalizedMessage = _wrapMessage(normalizedMessage);
+          }
           normalizedMessage.setBold();
         } else if (formatter == ChatFormatter.obfuscated) {
-          if (normalizedMessage.obfuscated != null)
+          if (normalizedMessage.obfuscated != null) {
             normalizedMessage = _wrapMessage(normalizedMessage);
+          }
           normalizedMessage.setObfuscated();
         } else if (formatter == ChatFormatter.strikethrough) {
-          if (normalizedMessage.strikethrough != null)
+          if (normalizedMessage.strikethrough != null) {
             normalizedMessage = _wrapMessage(normalizedMessage);
+          }
           normalizedMessage.setStrikethrough();
         } else if (formatter == ChatFormatter.reset) {
           _wrapMessage(normalizedMessage); // always
           normalizedMessage.reset();
         } else if (formatter == ChatFormatter.underline) {
-          if (normalizedMessage.underlined != null)
+          if (normalizedMessage.underlined != null) {
             normalizedMessage = _wrapMessage(normalizedMessage);
+          }
           normalizedMessage.setUnderlined();
         }
 
@@ -172,7 +177,7 @@ class ChatObject {
       }
     }
 
-    // last character is not added unless it is a color/formatter
+    /// last character is not added unless it is a color/formatter
     if (i < text.length) {
       normalizedMessage.text += text.substring(i);
     }
@@ -181,7 +186,7 @@ class ChatObject {
   }
 
   _wrapMessage(ChatObject parent) {
-    // append new child and transfer children
+    /// append new child and transfer children
     ChatObject child = ChatObject();
     child.extra.addAll(parent.extra);
     child.setColor(color);

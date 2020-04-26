@@ -32,7 +32,7 @@ class ChatColor {
   /// Minecraft color name
   final String name;
 
-  ChatColor(this.code, this.name) {}
+  ChatColor(this.code, this.name);
 
   /// Check if the provided 2-char code corresponds to a Minecraft color
   static isColor(String code) {
