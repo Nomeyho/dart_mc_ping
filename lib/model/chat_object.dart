@@ -47,7 +47,9 @@ class ChatObject {
     this.color = chatColor;
     this
         .extra
-        .where((extra) => extra.color == null) /// children can override style
+        .where((extra) => extra.color == null)
+
+        /// children can override style
         .forEach((extra) => extra.setColor(chatColor));
   }
 
@@ -101,10 +103,8 @@ class ChatObject {
     this.bold = null;
   }
 
-  /**
-   * Used to remove color code and format code from the text and use
-   * the dedicated fields of the ChatObject: bold, italic etc.
-   */
+  /// Used to remove color code and format code from the text and use
+  /// the dedicated fields of the ChatObject: bold, italic etc.
   ChatObject normalize() {
     final ChatObject rootMessage = ChatObject()
       ..color = color
