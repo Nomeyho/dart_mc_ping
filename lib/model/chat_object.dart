@@ -47,7 +47,7 @@ class ChatObject {
     this.color = chatColor;
     this
         .extra
-        .where((extra) => extra.color == null) // children can override style
+        .where((extra) => extra.color == null) /// children can override style
         .forEach((extra) => extra.setColor(chatColor));
   }
 
