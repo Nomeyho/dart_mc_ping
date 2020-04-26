@@ -1,9 +1,9 @@
+import 'dart:convert' show jsonDecode;
 import 'dart:typed_data';
 
 import 'package:dart_mc_ping/model/status_response.dart';
 import 'package:dart_mc_ping/packet/packet.dart';
 import 'package:raw/raw.dart';
-import 'dart:convert' show jsonDecode;
 
 class ResponsePacket extends Packet {
   StatusResponse response;

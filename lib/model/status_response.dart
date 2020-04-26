@@ -20,15 +20,20 @@ class StatusResponse {
   int ms; // added afterwards
 
   StatusResponse.fromJson(Map<String, dynamic> json)
-      : description = json['description'] is String
-            ? ChatObject.fromString(json['description'])
-            : ChatObject.fromJson(json['description']),
+      : description = _parseDescription(json),
         players = Players.fromJson(json['players']),
         version = Version.fromJson(json['version']),
         favicon = json['favicon'];
 
+  static ChatObject _parseDescription(Map<String, dynamic> json) {
+    final ChatObject description = json['description'] is String
+        ? ChatObject.fromString(json['description'])
+        : ChatObject.fromJson(json['description']);
+    return description.normalize();
+  }
+
   @override
   String toString() {
-    return 'StatusResponse{description: $description, players: $players, version: $version, favicon: $favicon, ms: $ms}';
+    return 'StatusResponse{description: $description, players: $players, version: $version, favicon: ${favicon == null ? favicon.substring(0, 20) : null}, ms: $ms}';
   }
 }

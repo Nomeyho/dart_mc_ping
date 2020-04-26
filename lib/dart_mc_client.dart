@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:dart_mc_ping/logger.dart';
 import 'package:dart_mc_ping/model/status_response.dart';
 import 'package:dart_mc_ping/packet/handshake_packet.dart';
 import 'package:dart_mc_ping/packet/packet.dart';
@@ -14,7 +15,6 @@ import 'package:raw/raw.dart';
 
 /// Minecraft socket client.
 class McClient {
-  static final log = Logger('McClient');
   static final timeout = Duration(seconds: 10);
 
   final String _host;
@@ -27,7 +27,7 @@ class McClient {
   connect() async {
     _socket = await Socket.connect(_host, _port, timeout: timeout);
     _socketStream = _socket.asBroadcastStream();
-    log.fine("Connected to $_host:$_port");
+    logger.fine("Connected to $_host:$_port");
   }
 
   Future<Packet> _readPacket() async {
@@ -44,7 +44,7 @@ class McClient {
       final RawReader reader = RawReader.withBytes(buffer);
       final int size = reader.readVarUint();
       final int id = reader.readVarUint();
-      log.finer('Received packet $id (${buffer.length} / $size bytes)');
+      logger.finer('Received packet $id (${buffer.length} / $size bytes)');
 
       if (buffer.length >= size) {
         break;
@@ -60,7 +60,7 @@ class McClient {
     for (int i = 0; i < size - 1; ++i) {
       payload[i] = reader.readUint8();
     }
-    log.finest('Read payload of packet id=$id (size=$size): $payload');
+    logger.finest('Read payload of packet id=$id (size=$size): $payload');
 
     /// Decode packet
     Packet packet;
@@ -76,12 +76,12 @@ class McClient {
     }
 
     packet.decode(payload);
-    log.fine('Received $packet');
+    logger.fine('Received $packet');
     return packet;
   }
 
   void _writePacket(Packet packet) {
-    log.fine('Sending $packet');
+    logger.fine('Sending $packet');
     final Uint8List data = packet.encode();
     final int dataLen = data.length;
 
@@ -93,7 +93,7 @@ class McClient {
     final int bytesLen = packetWriter.length;
     final Uint8List bytes = packetWriter.toUint8ListView().sublist(0, bytesLen);
 
-    log.finest('Sending bytes: $bytes');
+    logger.finest('Sending bytes: $bytes');
     _socket.add(bytes);
   }
 
@@ -118,6 +118,6 @@ class McClient {
 
   close() async {
     await _socket.close();
-    log.fine("Connection closed");
+    logger.fine("Connection closed");
   }
 }
