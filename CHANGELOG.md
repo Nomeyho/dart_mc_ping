@@ -1,3 +1,6 @@
+## [1.0.8] - 27/04/2020
+* Added color hexadecimal value
+
 ## [1.0.7] - 26/04/2020
 * Minor fix
 

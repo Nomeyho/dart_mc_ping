@@ -32,7 +32,10 @@ class ChatColor {
   /// Minecraft color name
   final String name;
 
-  ChatColor(this.code, this.name);
+  /// Hexadecimal color value
+  final int hex;
+
+  ChatColor(this.code, this.name, this.hex);
 
   /// Check if the provided 2-char code corresponds to a Minecraft color
   static isColor(String code) {
@@ -91,20 +94,20 @@ class ChatColor {
     }
   }
 
-  static final black = ChatColor('§0', 'black');
-  static final dark_blue = ChatColor('§1', 'dark_blue');
-  static final dark_green = ChatColor('§2', 'dark_green');
-  static final dark_aqua = ChatColor('§3', 'dark_aqua');
-  static final dark_red = ChatColor('§4', 'dark_red');
-  static final dark_purple = ChatColor('§5', 'dark_purple');
-  static final gold = ChatColor('§6', 'gold');
-  static final gray = ChatColor('§7', 'gray');
-  static final dark_gray = ChatColor('§8', 'dark_gray');
-  static final blue = ChatColor('§9', 'blue');
-  static final green = ChatColor('§a', 'green');
-  static final aqua = ChatColor('§b', 'aqua');
-  static final red = ChatColor('§c', 'red');
-  static final light_purple = ChatColor('§d', 'light_purple');
-  static final yellow = ChatColor('§e', 'yellow');
-  static final white = ChatColor('§f', 'white');
+  static final black = ChatColor('§0', 'black', 0xff000000);
+  static final dark_blue = ChatColor('§1', 'dark_blue', 0xff0000AA);
+  static final dark_green = ChatColor('§2', 'dark_green', 0xff00AA00);
+  static final dark_aqua = ChatColor('§3', 'dark_aqua', 0xff00AAAA);
+  static final dark_red = ChatColor('§4', 'dark_red', 0xffAA0000);
+  static final dark_purple = ChatColor('§5', 'dark_purple', 0xffAA00AA);
+  static final gold = ChatColor('§6', 'gold', 0xffFFAA00);
+  static final gray = ChatColor('§7', 'gray', 0xffAAAAAA);
+  static final dark_gray = ChatColor('§8', 'dark_gray', 0xff555555);
+  static final blue = ChatColor('§9', 'blue', 0xff5555FF);
+  static final green = ChatColor('§a', 'green', 0xff55FF55);
+  static final aqua = ChatColor('§b', 'aqua', 0xff55FFFF);
+  static final red = ChatColor('§c', 'red', 0xffFF5555);
+  static final light_purple = ChatColor('§d', 'light_purple', 0xffFF55FF);
+  static final yellow = ChatColor('§e', 'yellow', 0xffFFFF55);
+  static final white = ChatColor('§f', 'white', 0xffFFFFFF);
 }
