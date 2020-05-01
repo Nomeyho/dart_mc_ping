@@ -1,5 +1,5 @@
-import 'package:dart_mc_ping/model/players.dart';
 import 'package:dart_mc_ping/model/chat_object.dart';
+import 'package:dart_mc_ping/model/players.dart';
 import 'package:dart_mc_ping/model/version.dart';
 
 /// Minecraft Server status
@@ -23,13 +23,17 @@ class StatusResponse {
       : description = _parseDescription(json),
         players = Players.fromJson(json['players']),
         version = Version.fromJson(json['version']),
-        favicon = json['favicon'];
+        favicon = _parseFavicon(json['favicon']);
 
   static ChatObject _parseDescription(Map<String, dynamic> json) {
     final ChatObject description = json['description'] is String
         ? ChatObject.fromString(json['description'])
         : ChatObject.fromJson(json['description']);
     return description.normalize();
+  }
+
+  static String _parseFavicon(String favicon) {
+    return favicon.replaceAll('\n', '');
   }
 
   @override

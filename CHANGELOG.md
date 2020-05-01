@@ -1,3 +1,6 @@
+## [1.0.9] - 01/05/2020
+* Handle line return in base64 image
+
 ## [1.0.8] - 27/04/2020
 * Added color hexadecimal value
 
