@@ -1,3 +1,6 @@
+## [1.0.10] - 01/05/2020
+* Fix NPE when favicon is not provided
+
 ## [1.0.9] - 01/05/2020
 * Handle line return in base64 image
 

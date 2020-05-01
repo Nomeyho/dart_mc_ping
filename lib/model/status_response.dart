@@ -33,7 +33,7 @@ class StatusResponse {
   }
 
   static String _parseFavicon(String favicon) {
-    return favicon.replaceAll('\n', '');
+    return favicon?.replaceAll('\n', '');
   }
 
   @override
